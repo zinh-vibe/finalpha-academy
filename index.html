@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinAlpha Academy — Product Education Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,1,400&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --t:#00b8b8;--c:#0098d4;--b:#0a6fd6;--i:#1f3cc8;
+  --bg:#070b1c;--sf:#0c1230;--cd:#101b3a;--c2:#0e1836;
+  --ink:#eef2ff;--sub:#8fa0cc;--dim:#4e5f8a;
+  --ln:rgba(100,130,255,.11);
+  --gr:linear-gradient(110deg,#00b8b8 0%,#0098d4 36%,#0a6fd6 68%,#1f3cc8 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:'Fraunces',serif;line-height:1.1;letter-spacing:-.01em}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+.gt{background:var(--gr);-webkit-background-clip:text;background-clip:text;color:transparent}
+btn,button{font-family:'Sora';cursor:pointer}
+
+/* ── NAV ── */
+header{position:fixed;inset:0 0 auto;z-index:200;transition:.3s}
+header.up{background:rgba(7,11,28,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--ln)}
+nav{display:flex;align-items:center;height:66px;gap:0}
+.logo{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-right:36px}
+.logo img{height:26px}
+.logo-sep{width:1px;height:16px;background:var(--ln);margin:0 2px}
+.logo-lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.nav-links{display:flex;gap:26px;flex:1}
+.nav-links a{font-size:13.5px;color:var(--sub);transition:color .18s}
+.nav-links a:hover,.nav-links a.on{color:var(--ink)}
+.nav-end{margin-left:auto;display:flex;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:9px 18px;border-radius:100px;transition:.2s;border:0}
+.btn-g{background:none;border:1px solid var(--ln);color:var(--sub)}.btn-g:hover{border-color:rgba(0,184,184,.4);color:var(--ink)}
+.btn-f{background:var(--gr);color:#fff;box-shadow:0 6px 18px rgba(10,111,214,.28)}.btn-f:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(10,111,214,.44)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;padding:4px;margin-left:16px}
+.burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile nav */
+.m-nav{position:fixed;top:66px;left:0;right:0;background:rgba(7,11,28,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--ln);z-index:199;padding:20px 28px 28px;flex-direction:column;gap:0;transform:translateY(-110%);transition:transform .32s ease;display:flex}
+.m-nav.open{transform:translateY(0)}
+.m-nav a{font-size:16px;color:var(--sub);padding:14px 0;border-bottom:1px solid var(--ln);display:block;transition:color .18s}
+.m-nav a:last-of-type{border-bottom:0;margin-bottom:16px}
+.m-nav a:hover{color:var(--t)}
+.m-nav .btn-f{width:100%;justify-content:center;font-size:14px;padding:13px 20px}
+
+/* ── HERO ── */
+.hero{padding:140px 0 64px;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 50% at 50% 30%,#000 20%,transparent 72%)}
+.glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.ga{width:440px;height:440px;top:-180px;right:-60px;background:radial-gradient(#00b8b8,transparent 65%);opacity:.3}
+.gb{width:380px;height:380px;bottom:-180px;left:-80px;background:radial-gradient(#1f3cc8,transparent 65%);opacity:.36}
+.hero-in{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.ey{display:inline-flex;align-items:center;gap:8px;background:rgba(0,184,184,.1);border:1px solid rgba(0,184,184,.2);border-radius:100px;padding:6px 16px;font-size:11.5px;font-weight:600;color:var(--t);letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+.ey span{width:6px;height:6px;border-radius:50%;background:var(--t);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(36px,5.5vw,62px);font-weight:600;margin-bottom:18px}
+.hero p{font-size:17px;color:var(--sub);max-width:540px;margin:0 auto 32px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-btns .btn{padding:13px 26px;font-size:14px}
+
+/* ── MARQUEE ── */
+.mq{border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);background:var(--sf);padding:15px 0;overflow:hidden;margin-top:52px}
+.mq-t{display:flex;width:max-content;animation:slide 32s linear infinite}
+.mq:hover .mq-t{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.mq-t span{display:flex;align-items:center;gap:10px;padding:0 28px;font-size:13px;color:var(--dim);font-weight:500;white-space:nowrap}
+.mq-t span::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--t);opacity:.6}
+
+/* ── ONBOARDING STRIP ── */
+.ob-sec{padding:72px 0 0}
+.sec-ey{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--t);display:block;margin-bottom:10px}
+.sec-h{font-size:clamp(24px,3vw,36px);margin-bottom:12px}
+.sec-p{font-size:15.5px;color:var(--sub);max-width:560px;line-height:1.7;margin-bottom:36px}
+.ob-strip{background:linear-gradient(145deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:18px;display:grid;grid-template-columns:repeat(3,1fr)}
+.ob-step{padding:32px 30px;position:relative}
+.ob-step+.ob-step::before{content:"";position:absolute;left:0;top:20%;height:60%;width:1px;background:var(--ln)}
+.step-n{font-family:'Fraunces';font-size:38px;font-weight:600;background:var(--gr);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:12px}
+.step-t{font-family:'Sora';font-size:16px;font-weight:600;margin-bottom:8px}
+.step-d{font-size:13.5px;color:var(--sub);line-height:1.65}
+.step-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;font-weight:700;color:var(--t);transition:gap .18s}
+.step-link:hover{gap:10px}
+
+/* ── PERSONA PATHS ── */
+.persona-sec{padding:64px 0 0}
+.persona-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:0}
+.persona{background:linear-gradient(155deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:14px;padding:20px 16px;cursor:pointer;transition:.22s;text-align:center}
+.persona:hover{border-color:rgba(0,184,184,.35);transform:translateY(-5px)}
+.persona.on{border-color:rgba(0,184,184,.55);background:linear-gradient(155deg,#11214a,#0e1c40)}
+.persona-ico{width:44px;height:44px;border-radius:11px;background:var(--gr);margin:0 auto 12px;display:flex;align-items:center;justify-content:center}
+.persona h4{font-family:'Sora';font-size:13px;font-weight:600;margin-bottom:5px;line-height:1.35}
+.persona p{font-size:11.5px;color:var(--sub);line-height:1.55}
+.persona-content{margin-top:20px}
+.pc-block{display:none;animation:fin .3s ease}
+.pc-block.show{display:block}
+.pc-inner{background:linear-gradient(145deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:14px;padding:28px 32px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.pc-inner h3{font-size:21px;margin-bottom:8px}
+.pc-who{font-size:12px;color:var(--t);font-weight:600;letter-spacing:.04em;margin-bottom:12px}
+.pc-desc{font-size:14px;color:var(--sub);line-height:1.65;margin-bottom:18px}
+.pc-steps{display:grid;gap:10px}
+.pc-step{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg);border:1px solid var(--ln);border-radius:10px;transition:.2s}
+.pc-step:hover{border-color:rgba(0,184,184,.35)}
+.pc-step .sn{width:28px;height:28px;border-radius:7px;background:var(--gr);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.pc-step .st{font-size:13.5px;font-weight:500;flex:1}
+.pc-step .so{font-size:11px;color:var(--dim)}
+.pc-cta{margin-top:16px}
+
+/* ── LIBRARY ── */
+.lib-sec{padding:64px 0}
+.lib-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.lib-hdr h2{font-size:clamp(24px,3vw,36px);margin:0}
+.srch{display:flex;align-items:center;gap:9px;padding:10px 15px;background:var(--sf);border:1px solid var(--ln);border-radius:10px;min-width:220px;transition:.2s}
+.srch:focus-within{border-color:rgba(0,184,184,.45);background:var(--cd)}
+.srch svg{flex-shrink:0;color:var(--dim)}
+.srch input{background:none;border:0;outline:0;color:var(--ink);font-family:'Sora';font-size:13.5px;width:100%}
+.srch input::placeholder{color:var(--dim)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;align-items:center}
+.tab{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:500;border:1px solid transparent;background:none;cursor:pointer;color:var(--sub);transition:.2s}
+.tab:hover{background:var(--cd);color:var(--ink)}.tab.on{background:var(--cd);border-color:rgba(0,184,184,.28);color:var(--ink)}
+.tab .n{font-size:10px;font-weight:700;padding:2px 6px;border-radius:100px;background:rgba(0,184,184,.12);color:var(--t)}
+.tab.on .n{background:rgba(0,184,184,.22)}
+.tinfo{margin-left:auto;font-size:12px;color:var(--dim)}
+
+/* cat blocks */
+.cb{display:none}.cb.show{display:block;animation:fin .32s ease}
+@keyframes fin{from{opacity:0;transform:translateY(10px)}}
+.sl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sl::after{content:"";flex:1;height:1px;background:var(--ln)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+
+/* FEATURED VIDEO */
+.fv{border-radius:16px;overflow:hidden;margin-bottom:28px;background:linear-gradient(145deg,#0b1635,#0d1c40);border:1px solid var(--ln);cursor:pointer;display:grid;grid-template-columns:1fr 380px;min-height:240px;transition:border-color .22s}
+.fv:hover{border-color:rgba(0,184,184,.36)}
+.fv-th{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#091430,#0c1a38)}
+.fv-th::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:26px 26px}
+.wv{position:absolute;inset:0;background:linear-gradient(130deg,rgba(0,184,184,.08),rgba(10,111,214,.14));animation:wva 6s ease-in-out infinite}
+@keyframes wva{0%,100%{opacity:.6}50%{opacity:1}}
+.fv-play{position:relative;z-index:2;width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;transition:.22s}
+.fv:hover .fv-play{background:rgba(0,184,184,.24);border-color:rgba(0,184,184,.6);transform:scale(1.08)}
+.fv-play svg{margin-left:4px}
+.dur{position:absolute;bottom:12px;right:12px;z-index:2;font-size:10.5px;font-weight:700;padding:3.5px 9px;border-radius:5px;background:rgba(7,11,28,.84);color:var(--ink)}
+.fv-meta{padding:28px 30px;display:flex;flex-direction:column;justify-content:center}
+.fv-chip{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t);display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.fv-chip::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--t)}
+.fv-meta h3{font-size:clamp(17px,2.2vw,22px);margin-bottom:10px}
+.fv-meta p{font-size:13px;color:var(--sub);line-height:1.6;margin-bottom:16px}
+.fv-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.fv-tags span{font-size:10.5px;padding:3px 9px;border-radius:100px;background:var(--sf);border:1px solid var(--ln);color:var(--sub)}
+.fv-go{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--t);transition:gap .18s}
+.fv:hover .fv-go{gap:11px}
+
+/* VIDEO 3-COL */
+.v3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.vc{background:linear-gradient(155deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:13px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .22s,border-color .22s;position:relative}
+.vc:hover{transform:translateY(-5px);border-color:rgba(0,184,184,.34)}
+.vc-done{position:absolute;top:8px;left:8px;z-index:3;width:22px;height:22px;border-radius:50%;background:var(--t);display:none;align-items:center;justify-content:center}
+.vc-done.show{display:flex}
+.vc-t{position:relative;padding-top:56.25%;background:linear-gradient(135deg,#0a153a,#0d1c40);overflow:hidden}
+.vc-t::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:20px 20px}
+.tg{position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(0,152,212,.1));animation:tga 5s ease-in-out infinite}
+@keyframes tga{0%,100%{opacity:.5}50%{opacity:1}}
+.vpl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;transition:.2s}
+.vpl svg{margin-left:3px}
+.vc:hover .vpl{background:rgba(0,184,184,.24);border-color:rgba(0,184,184,.5);transform:translate(-50%,-50%) scale(1.08)}
+.vcat{position:absolute;top:8px;right:8px;z-index:2;font-size:9.5px;font-weight:700;padding:2.5px 8px;border-radius:4px;background:rgba(7,11,28,.78);color:var(--sub);border:1px solid var(--ln)}
+.vc-b{padding:14px 15px 17px;flex:1;display:flex;flex-direction:column}
+.vc-b h4{font-family:'Sora';font-size:14px;font-weight:600;margin-bottom:6px;line-height:1.4}
+.vc-b p{font-size:12px;color:var(--sub);flex:1;line-height:1.6}
+.vc-f{margin-top:12px;padding-top:10px;border-top:1px solid var(--ln);display:flex;align-items:center;justify-content:space-between}
+.who{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:5px}
+.who::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--t)}
+.cgo{font-size:11.5px;font-weight:700;color:var(--t)}
+
+/* SHORTS 4-COL */
+.s4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:28px}
+.sc{background:linear-gradient(155deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .22s,border-color .22s;position:relative}
+.sc:hover{transform:translateY(-4px);border-color:rgba(0,184,184,.34)}
+.sc-done{position:absolute;top:7px;left:7px;z-index:3;width:20px;height:20px;border-radius:50%;background:var(--t);display:none;align-items:center;justify-content:center}
+.sc-done.show{display:flex}
+.sc-t{position:relative;padding-top:150%;background:linear-gradient(160deg,#0a1534,#0e1d42);overflow:hidden}
+.sc-t::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:15px 15px}
+.sg{position:absolute;inset:0;background:linear-gradient(165deg,rgba(0,184,184,.07),rgba(31,60,200,.13));animation:tga 4s ease-in-out infinite}
+.spl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;transition:.2s}
+.spl svg{margin-left:3px}
+.sc:hover .spl{background:rgba(0,184,184,.24);border-color:rgba(0,184,184,.5);transform:translate(-50%,-50%) scale(1.08)}
+.schip{position:absolute;top:7px;right:7px;z-index:2;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(0,184,184,.2);color:var(--t);border:1px solid rgba(0,184,184,.22)}
+.sdur{position:absolute;bottom:7px;right:7px;z-index:2;font-size:10px;font-weight:700;padding:2.5px 7px;border-radius:4px;background:rgba(7,11,28,.82);color:var(--ink)}
+.sc-b{padding:11px 12px 13px}
+.sc-b h5{font-family:'Sora';font-size:12.5px;font-weight:600;margin-bottom:4px;line-height:1.4}
+.sc-b p{font-size:11px;color:var(--sub);line-height:1.5}
+
+/* ARTICLE 2-COL */
+.a2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.ac{background:linear-gradient(155deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:12px;padding:20px 20px;display:flex;gap:14px;cursor:pointer;transition:.2s;position:relative}
+.ac:hover{border-color:rgba(0,184,184,.34);transform:translateY(-3px)}
+.ac-done{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--t);display:none;align-items:center;justify-content:center}
+.ac-done.show{display:flex}
+.ac-ico{width:42px;height:42px;border-radius:10px;background:var(--gr);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ac h4{font-family:'Sora';font-size:14px;font-weight:600;margin-bottom:6px;line-height:1.35}
+.ac p{font-size:12px;color:var(--sub);line-height:1.6}
+.ac-f{margin-top:9px;display:flex;align-items:center;justify-content:space-between}
+.ac-f .tag{font-size:11px;color:var(--dim)}.ac-f .go{font-size:11.5px;font-weight:700;color:var(--t)}
+
+/* PLAYBOOK LIST */
+.pb-list{display:grid;gap:11px;margin-bottom:28px}
+.pb{background:linear-gradient(155deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:12px;padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:center;cursor:pointer;transition:.2s;position:relative}
+.pb:hover{border-color:rgba(0,184,184,.34);transform:translateX(5px)}
+.pb-done{position:absolute;top:10px;right:80px;width:20px;height:20px;border-radius:50%;background:var(--t);display:none;align-items:center;justify-content:center}
+.pb-done.show{display:flex}
+.pb-ico{width:46px;height:46px;border-radius:10px;background:var(--gr);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pb h4{font-family:'Sora';font-size:14.5px;font-weight:600;margin-bottom:4px}
+.pb p{font-size:12.5px;color:var(--sub)}
+.pb-tags{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.pb-tags span{font-size:10px;padding:2.5px 8px;border-radius:100px;background:var(--sf);border:1px solid var(--ln);color:var(--sub)}
+.pb-r{display:flex;flex-direction:column;align-items:flex-end;gap:7px;flex-shrink:0}
+.pb-badge{font-size:10px;font-weight:700;padding:3.5px 10px;border-radius:100px;background:rgba(0,184,184,.11);border:1px solid rgba(0,184,184,.18);color:var(--t)}
+.pb-go{font-size:12px;font-weight:700;color:var(--t);white-space:nowrap}
+
+/* UPDATE CARDS */
+.upd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.upd{background:linear-gradient(155deg,var(--cd),var(--c2));border:1px solid var(--ln);border-radius:13px;padding:22px;cursor:pointer;transition:.22s}
+.upd:hover{border-color:rgba(0,184,184,.34);transform:translateY(-4px)}
+.upd-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.upd-ico{width:38px;height:38px;border-radius:9px;background:var(--gr);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.upd-chip{font-size:10px;font-weight:700;padding:3px 9px;border-radius:100px;background:rgba(0,184,184,.12);color:var(--t);border:1px solid rgba(0,184,184,.18)}
+.upd-date{font-size:11px;color:var(--dim);margin-left:auto}
+.upd h4{font-family:'Sora';font-size:14.5px;font-weight:600;margin-bottom:7px;line-height:1.4}
+.upd p{font-size:12.5px;color:var(--sub);line-height:1.6;margin-bottom:14px}
+.upd-go{font-size:12px;font-weight:700;color:var(--t)}
+
+/* EMPTY */
+.empty{display:none;text-align:center;padding:70px 20px;color:var(--dim);font-size:14px}
+.empty.show{display:block}
+
+/* progress bar */
+.prog-bar{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:16px 20px;margin-bottom:28px;display:flex;align-items:center;gap:16px}
+.prog-bar .pl{font-size:13px;font-weight:600;flex:1}
+.prog-bar .pr{font-size:12px;color:var(--sub)}
+.prog-track{flex:1;height:6px;background:rgba(255,255,255,.07);border-radius:3px;min-width:120px;overflow:hidden}
+.prog-fill{height:100%;background:var(--gr);border-radius:3px;transition:width .5s ease}
+
+/* ── FOR BUSINESS ── */
+.biz-sec{padding:64px 0}
+.biz-wrap{background:linear-gradient(148deg,#0f1c3e,#0d1836);border:1px solid var(--ln);border-radius:20px;padding:52px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;position:relative;overflow:hidden}
+.biz-wrap::after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(rgba(0,184,184,.18),transparent 70%);top:-100px;right:-80px;filter:blur(36px);pointer-events:none}
+.biz-wrap>*{position:relative;z-index:1}
+.biz-wrap h2{font-size:clamp(24px,3vw,36px);margin:12px 0 14px}
+.biz-wrap>div>p{font-size:15px;color:var(--sub);margin-bottom:20px}
+.biz-chk{display:grid;gap:10px;margin-bottom:24px}
+.biz-chk li{list-style:none;display:flex;gap:10px;font-size:14px;align-items:flex-start}
+.biz-chk li svg{flex-shrink:0;margin-top:2px}
+.biz-cards{display:grid;gap:11px}
+.bc{background:var(--bg);border:1px solid var(--ln);border-radius:11px;padding:17px 19px;transition:.2s;cursor:pointer}
+.bc:hover{border-color:rgba(0,184,184,.36);transform:translateY(-3px)}
+.bc-h{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.bc-ico{width:32px;height:32px;border-radius:8px;background:var(--gr);display:flex;align-items:center;justify-content:center}
+.bc h4{font-family:'Sora';font-size:14px;font-weight:600}
+.bc p{font-size:12px;color:var(--sub)}
+
+/* ── CTA BAND ── */
+.cta-sec{padding:0 0 80px}
+.cta-band{text-align:center;padding:80px 52px;border-radius:20px;position:relative;overflow:hidden;background:linear-gradient(145deg,#071028,#0c1638);border:1px solid var(--ln)}
+.cta-band::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse 68% 80% at 50% 50%,#000,transparent 74%)}
+.cta-glow{position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(var(--b),transparent 65%);top:-160px;left:50%;transform:translateX(-50%);opacity:.28;filter:blur(40px)}
+.cta-band>*{position:relative;z-index:1}
+.cta-band h2{font-size:clamp(26px,3.5vw,44px);margin-bottom:14px}
+.cta-band p{font-size:16px;color:var(--sub);max-width:480px;margin:0 auto 28px}
+.cta-btns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap}
+.cta-btns .btn{padding:13px 26px;font-size:14px}
+.cta-note{margin-top:18px;font-size:12px;color:var(--dim)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--ln);background:var(--sf);padding:52px 0 32px}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.fb img{height:24px;margin-bottom:14px;display:block}
+.fb .fb-desc{font-size:13px;color:var(--sub);max-width:280px;line-height:1.65;margin-bottom:16px}
+.fb-info{display:grid;gap:6px}
+.fb-info a{font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:7px;transition:color .18s}
+.fb-info a:hover{color:var(--t)}
+.fb-info svg{flex-shrink:0;opacity:.7}
+.fc h6{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.fc a{display:block;font-size:13px;color:var(--sub);margin-bottom:10px;transition:color .18s}
+.fc a:hover{color:var(--t)}
+.fb2{border-top:1px solid var(--ln);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fb2 p{font-size:12px;color:var(--dim)}
+.disc{margin-top:18px;padding:14px 18px;background:var(--bg);border:1px solid var(--ln);border-radius:10px;font-size:11.5px;color:var(--dim);line-height:1.65}
+.disc b{color:var(--sub)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1020px){
+  .v3{grid-template-columns:1fr 1fr}.fv{grid-template-columns:1fr}
+  .s4{grid-template-columns:repeat(2,1fr)}.a2{grid-template-columns:1fr}
+  .biz-wrap{grid-template-columns:1fr;padding:36px}
+  .ob-strip{grid-template-columns:1fr}
+  .ob-step+.ob-step::before{display:none}
+  .persona-grid{grid-template-columns:repeat(3,1fr)}
+  .pc-inner{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr 1fr}
+  .upd-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  .v3,.s4,.upd-grid{grid-template-columns:1fr}
+  .hero{padding:118px 0 50px}
+  .lib-sec,.biz-sec,.ob-sec,.persona-sec{padding-top:52px}
+  .cta-band{padding:52px 22px}
+  .biz-wrap{padding:26px}
+  .pb{grid-template-columns:42px 1fr}
+  .pb-r{display:none}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .ft{grid-template-columns:1fr}
+  .persona-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<!-- ── NAV ── -->
+<header id="hdr">
+<div class="wrap"><nav>
+  <a class="logo" href="#"><img src="logo.png" alt="FinAlpha"><span class="logo-sep"></span><span class="logo-lbl">Academy</span></a>
+  <div class="nav-links">
+    <a href="#start" class="on">Bắt đầu</a>
+    <a href="#lib-sec">Thư viện</a>
+    <a href="#persona">Lộ trình</a>
+    <a href="#biz-sec">For Business</a>
+  </div>
+  <div class="nav-end">
+    <button class="btn btn-g">Đăng nhập</button>
+    <button class="btn btn-f" onclick="scroll('#lib-sec')">Bắt đầu học</button>
+  </div>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav></div>
+</header>
+<div class="m-nav" id="mnav">
+  <a href="#start" onclick="closeMnav()">Bắt đầu</a>
+  <a href="#lib-sec" onclick="closeMnav()">Thư viện</a>
+  <a href="#persona" onclick="closeMnav()">Lộ trình</a>
+  <a href="#biz-sec" onclick="closeMnav()">For Business</a>
+  <button class="btn btn-f" onclick="closeMnav();scroll('#lib-sec')">Bắt đầu học miễn phí</button>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="glow ga"></div><div class="glow gb"></div>
+  <div class="wrap"><div class="hero-in">
+    <div class="ey"><span></span>Học thực hành · Gắn với sản phẩm</div>
+    <h1>Làm chủ <em>FinAlpha</em><br>từ bài học <span class="gt">đầu tiên.</span></h1>
+    <p>Video tutorial ngắn, bài đọc thực hành và playbook theo workflow — học xong là dùng được ngay trong FinAlpha.</p>
+    <div class="hero-btns">
+      <button class="btn btn-f" onclick="scroll('#start')">Bắt đầu học <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button>
+      <button class="btn btn-g" onclick="scroll('#lib-sec')">Xem thư viện</button>
+    </div>
+  </div></div>
+  <div class="mq"><div class="mq-t">
+    <span>Start Here</span><span>StockGPT</span><span>FinStock</span><span>FinData</span><span>FinRadar</span><span>Watchlist</span><span>Market Morning</span><span>Stock Research</span><span>Report Builder</span><span>Finance Basics</span><span>Playbooks</span><span>For Business</span><span>Product Updates</span>
+    <span>Start Here</span><span>StockGPT</span><span>FinStock</span><span>FinData</span><span>FinRadar</span><span>Watchlist</span><span>Market Morning</span><span>Stock Research</span><span>Report Builder</span><span>Finance Basics</span><span>Playbooks</span><span>For Business</span><span>Product Updates</span>
+  </div></div>
+</section>
+
+<!-- ── 3-STEP ONBOARDING STRIP ── -->
+<section class="ob-sec" id="start">
+<div class="wrap">
+  <div class="rv">
+    <span class="sec-ey">Mới đến? Bắt đầu tại đây</span>
+    <h2 class="sec-h">Ba bước để học hiệu quả với FinAlpha.</h2>
+    <p class="sec-p">Không cần nền tảng tài chính. Mỗi bài học gắn với một thao tác thật trong sản phẩm — học xong là làm được ngay.</p>
+  </div>
+  <div class="ob-strip rv">
+    <div class="ob-step">
+      <div class="step-n">01</div>
+      <div class="step-t">Chọn lộ trình của bạn</div>
+      <p class="step-d">Nhà đầu tư mới, người có kinh nghiệm, analyst, broker hay business leader — mỗi nhóm có lộ trình học riêng phù hợp với công việc thực tế.</p>
+      <a class="step-link" href="#persona" onclick="scroll('#persona')">Xem lộ trình <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></a>
+    </div>
+    <div class="ob-step">
+      <div class="step-n">02</div>
+      <div class="step-t">Học từng bài ngắn</div>
+      <p class="step-d">Mỗi tutorial 5–15 phút, gắn với một thao tác cụ thể. Xem video hoặc đọc hướng dẫn rồi thực hành ngay trên FinAlpha.</p>
+      <a class="step-link" href="#lib-sec" onclick="scroll('#lib-sec')">Xem thư viện <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></a>
+    </div>
+    <div class="ob-step">
+      <div class="step-n">03</div>
+      <div class="step-t">Áp dụng vào workflow</div>
+      <p class="step-d">Khi đã quen từng tính năng, dùng Playbooks để xây workflow thực tế — từ phân tích cổ phiếu đến chuẩn bị gặp khách hay dựng báo cáo.</p>
+      <a class="step-link" href="#lib-sec" onclick="scroll('#lib-sec');setTab('playbook')">Xem Playbooks <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── PERSONA PATHS ── -->
+<section class="persona-sec" id="persona">
+<div class="wrap">
+  <div class="rv">
+    <span class="sec-ey">Lộ trình theo người dùng</span>
+    <h2 class="sec-h" style="margin-bottom:8px">Chọn lộ trình phù hợp với bạn.</h2>
+    <p class="sec-p">Mỗi nhóm người dùng có một con đường học khác nhau. Chọn vai trò để xem giáo trình gợi ý.</p>
+  </div>
+  <div class="persona-grid rv">
+    <div class="persona on" data-p="f0" onclick="setPersona('f0')">
+      <div class="persona-ico"><svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="8" r="3.5"/><path d="M5 19c0-3.3 2.7-5 6-5s6 1.7 6 5" stroke-linecap="round"/></svg></div>
+      <h4>New User / F0</h4>
+      <p>Mới mở tài khoản, chưa biết bắt đầu từ đâu</p>
+    </div>
+    <div class="persona" data-p="investor" onclick="setPersona('investor')">
+      <div class="persona-ico"><svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M3 17l5-6 4 3 6-8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 6h4v4" stroke-linecap="round"/></svg></div>
+      <h4>Retail Investor</h4>
+      <p>Muốn rút ngắn thời gian research mỗi ngày</p>
+    </div>
+    <div class="persona" data-p="analyst" onclick="setPersona('analyst')">
+      <div class="persona-ico"><svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M4 19V5M4 19h14M7 16V9M11 16V6M15 16v-5" stroke-linecap="round"/></svg></div>
+      <h4>Analyst / Research</h4>
+      <p>Muốn tăng tốc quy trình phân tích</p>
+    </div>
+    <div class="persona" data-p="broker" onclick="setPersona('broker')">
+      <div class="persona-ico"><svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="9" cy="7" r="3"/><path d="M3 18c0-3 2.5-4.5 6-4.5s6 1.5 6 4.5M16 10a3 3 0 000-6M21 18c0-2.5-1.5-4-4-4.5" stroke-linecap="round"/></svg></div>
+      <h4>Broker / Advisor</h4>
+      <p>Chuẩn bị nội dung trước buổi gặp khách</p>
+    </div>
+    <div class="persona" data-p="leader" onclick="setPersona('leader')">
+      <div class="persona-ico"><svg width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M3 19h16M5 19V9l6-5 6 5v10M9 19v-5h4v5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h4>Business Leader</h4>
+      <p>Triển khai FinAlpha cho cả đội ngũ</p>
+    </div>
+  </div>
+  <div class="persona-content rv">
+    <div class="pc-block show" id="pc-f0">
+      <div class="pc-inner">
+        <div>
+          <h3>Lộ trình cho người mới bắt đầu</h3>
+          <div class="pc-who">New User · F0 · Chưa có kinh nghiệm</div>
+          <p class="pc-desc">Một con đường rõ ràng từ con số 0: hiểu FinAlpha là gì, tạo không gian làm việc đầu tiên và biết hỏi AI theo hướng an toàn — hoàn thành trong khoảng 30 phút.</p>
+          <div class="pc-cta"><button class="btn btn-f" onclick="scroll('#lib-sec');setTab('start')" style="font-size:13px;padding:10px 20px">Bắt đầu Start Here <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button></div>
+        </div>
+        <div class="pc-steps">
+          <div class="pc-step"><div class="sn">1</div><div class="st">10 phút đầu với FinAlpha</div><div class="so">Video 3:45</div></div>
+          <div class="pc-step"><div class="sn">2</div><div class="st">FinAlpha là gì?</div><div class="so">Bài đọc 5 phút</div></div>
+          <div class="pc-step"><div class="sn">3</div><div class="st">Tạo workspace đầu tiên</div><div class="so">Thực hành 7 phút</div></div>
+          <div class="pc-step"><div class="sn">4</div><div class="st">Hỏi StockGPT câu đầu tiên</div><div class="so">Video 2:50</div></div>
+          <div class="pc-step"><div class="sn">5</div><div class="st">AI có thể và không thể làm gì?</div><div class="so">Short 0:52</div></div>
+          <div class="pc-step"><div class="sn">6</div><div class="st">Cổ phiếu & VN-Index là gì?</div><div class="so">Finance Basics</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pc-block" id="pc-investor">
+      <div class="pc-inner">
+        <div>
+          <h3>Rút ngắn thời gian research</h3>
+          <div class="pc-who">Retail Investor · Đã có kinh nghiệm</div>
+          <p class="pc-desc">Biến thói quen đọc thị trường thành một workflow gọn gàng — dùng Watchlist, Alerts và AI Summary để không bỏ lỡ tín hiệu quan trọng mỗi ngày.</p>
+          <div class="pc-cta"><button class="btn btn-f" onclick="scroll('#lib-sec');setTab('playbook')" style="font-size:13px;padding:10px 20px">Xem Playbooks <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button></div>
+        </div>
+        <div class="pc-steps">
+          <div class="pc-step"><div class="sn">1</div><div class="st">Market Morning Playbook</div><div class="so">Video + Bài viết</div></div>
+          <div class="pc-step"><div class="sn">2</div><div class="st">Watchlist & Alerts</div><div class="so">Tutorial video 3:10</div></div>
+          <div class="pc-step"><div class="sn">3</div><div class="st">Stock Research Playbook</div><div class="so">Bài viết + Checklist</div></div>
+          <div class="pc-step"><div class="sn">4</div><div class="st">FinStock: đọc trang cổ phiếu</div><div class="so">Video 3:20</div></div>
+          <div class="pc-step"><div class="sn">5</div><div class="st">Portfolio Review Playbook</div><div class="so">Bài viết + Checklist</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pc-block" id="pc-analyst">
+      <div class="pc-inner">
+        <div>
+          <h3>Tăng tốc quy trình phân tích</h3>
+          <div class="pc-who">Analyst · Research team</div>
+          <p class="pc-desc">Dùng FinData, Report Builder và workflow AI để tạo memo và báo cáo nhanh hơn — vẫn giữ chuẩn kiểm chứng dữ liệu và human review.</p>
+          <div class="pc-cta"><button class="btn btn-f" onclick="scroll('#lib-sec');setTab('learn')" style="font-size:13px;padding:10px 20px">Xem Learn FinAlpha <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button></div>
+        </div>
+        <div class="pc-steps">
+          <div class="pc-step"><div class="sn">1</div><div class="st">FinData: khai thác dữ liệu</div><div class="so">Video 3:55</div></div>
+          <div class="pc-step"><div class="sn">2</div><div class="st">Analyst Workflow Playbook</div><div class="so">Bài viết + Template</div></div>
+          <div class="pc-step"><div class="sn">3</div><div class="st">Report Builder</div><div class="so">Bài đọc 10 phút</div></div>
+          <div class="pc-step"><div class="sn">4</div><div class="st">News → Insight Playbook</div><div class="so">Bài viết</div></div>
+          <div class="pc-step"><div class="sn">5</div><div class="st">FinRadar: tin tức & sự kiện</div><div class="so">Video 2:35</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pc-block" id="pc-broker">
+      <div class="pc-inner">
+        <div>
+          <h3>Chuẩn bị gặp khách hiệu quả</h3>
+          <div class="pc-who">Broker · Advisor</div>
+          <p class="pc-desc">Bộ playbook giúp bạn dựng market brief và nội dung tư vấn nhanh — luôn đi qua bước human review và compliance gate bắt buộc.</p>
+          <div class="pc-cta"><button class="btn btn-f" onclick="scroll('#lib-sec');setTab('playbook')" style="font-size:13px;padding:10px 20px">Xem Playbooks <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button></div>
+        </div>
+        <div class="pc-steps">
+          <div class="pc-step"><div class="sn">1</div><div class="st">Broker Prep Playbook</div><div class="so">Video + Bài viết</div></div>
+          <div class="pc-step"><div class="sn">2</div><div class="st">Market Morning Playbook</div><div class="so">Video + Bài viết</div></div>
+          <div class="pc-step"><div class="sn">3</div><div class="st">Cách hỏi StockGPT hiệu quả</div><div class="so">Video 2:50</div></div>
+          <div class="pc-step"><div class="sn">4</div><div class="st">AI Safety — ranh giới tư vấn</div><div class="so">Short 0:52</div></div>
+          <div class="pc-step"><div class="sn">5</div><div class="st">Executive Brief Playbook</div><div class="so">Bài viết</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pc-block" id="pc-leader">
+      <div class="pc-inner">
+        <div>
+          <h3>Triển khai FinAlpha cho cả đội</h3>
+          <div class="pc-who">Business Leader · Manager</div>
+          <p class="pc-desc">Hiểu FinAlpha giúp đội tài chính giải quyết việc gì, xem use case theo phòng ban và lộ trình onboarding doanh nghiệp có kiểm soát.</p>
+          <div class="pc-cta"><button class="btn btn-f" onclick="scroll('#biz-sec')" style="font-size:13px;padding:10px 20px">Xem For Business <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button></div>
+        </div>
+        <div class="pc-steps">
+          <div class="pc-step"><div class="sn">1</div><div class="st">FinAlpha for Business — Overview</div><div class="so">Business page</div></div>
+          <div class="pc-step"><div class="sn">2</div><div class="st">Use Cases by Team</div><div class="so">Research, Sales, Advisory…</div></div>
+          <div class="pc-step"><div class="sn">3</div><div class="st">Security & Compliance pack</div><div class="so">Tài liệu doanh nghiệp</div></div>
+          <div class="pc-step"><div class="sn">4</div><div class="st">Enterprise Onboarding</div><div class="so">Lộ trình triển khai</div></div>
+          <div class="pc-step"><div class="sn">5</div><div class="st">Business Playbooks theo team</div><div class="so">Workflow mẫu</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!-- ── LIBRARY ── -->
+<section class="lib-sec" id="lib-sec">
+<div class="wrap">
+  <div class="lib-hdr rv"><div><span class="sec-ey">Thư viện hướng dẫn</span><h2>Tất cả bài học</h2></div>
+    <div class="srch"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 15 15"><circle cx="6.5" cy="6.5" r="5"/><path d="M10 10l3.5 3.5" stroke-linecap="round"/></svg><input id="q" type="text" placeholder="Tìm bài học, tính năng, playbook..."></div>
+  </div>
+  <div class="prog-bar rv" id="prog-wrap">
+    <div class="pl">Tiến độ học của bạn</div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="pr" id="prog-txt">0 / 28 bài</div>
+  </div>
+  <div class="tabs rv" id="tabs">
+    <button class="tab on" data-t="all">Tất cả <span class="n">28</span></button>
+    <button class="tab" data-t="start">Start Here <span class="n">8</span></button>
+    <button class="tab" data-t="learn">Learn FinAlpha <span class="n">8</span></button>
+    <button class="tab" data-t="playbook">Playbooks <span class="n">7</span></button>
+    <button class="tab" data-t="basics">Finance Basics <span class="n">5</span></button>
+    <button class="tab" data-t="updates">Product Updates <span class="n">4</span></button>
+    <span class="tinfo" id="tinfo">28 bài học</span>
+  </div>
+
+  <!-- ALL block -->
+  <div class="cb show" id="b-all">
+    <div class="rv"><div class="sl">Video nổi bật · Start Here</div>
+    <div class="fv" onclick="markDone(this,'fv-feat')">
+      <div class="fv-th"><div class="wv"></div><div class="fv-play"><svg width="22" height="22" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><span class="dur">3:45</span></div>
+      <div class="fv-meta"><span class="fv-chip">Bài 3 · Video · Start Here</span><h3>10 phút đầu với FinAlpha</h3><p>Tạo workspace, tra cứu cổ phiếu đầu tiên và hỏi StockGPT đúng cách — hoàn thành thao tác đầu tiên trong sản phẩm.</p><div class="fv-tags"><span>Tất cả người dùng</span><span>Onboarding</span></div><span class="fv-go">Xem video <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></span></div>
+    </div></div>
+    <div class="rv"><div class="sl">Video tutorial · 16:9 · 2–4 phút</div>
+    <div class="v3">
+      <div class="vc" data-cat="learn" data-k="stockgpt ai prompt hỏi" onclick="markDone(this,'vc-sg')"><div class="vc-done" id="vc-sg"><svg width="10" height="10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">2:50</span></div><div class="vc-b"><h4>Cách hỏi StockGPT hiệu quả</h4><p>Prompt mẫu theo use case, cách đọc output và kiểm chứng thông tin từ AI.</p><div class="vc-f"><span class="who">Tất cả</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc" data-cat="learn" data-k="finstock cổ phiếu chỉ số doanh nghiệp" onclick="markDone(this,'vc-fs')"><div class="vc-done" id="vc-fs"><svg width="10" height="10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">3:20</span></div><div class="vc-b"><h4>FinStock: đọc trang cổ phiếu</h4><p>Tra cứu mã, đọc dữ liệu doanh nghiệp và so sánh chỉ số định giá cùng ngành.</p><div class="vc-f"><span class="who">Investor · Analyst</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc" data-cat="learn" data-k="findata dữ liệu so sánh xuất file" onclick="markDone(this,'vc-fd')"><div class="vc-done" id="vc-fd"><svg width="10" height="10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">3:55</span></div><div class="vc-b"><h4>FinData: khai thác dữ liệu tài chính</h4><p>Lọc theo ngành, so sánh nhiều mã cùng lúc và xuất file dữ liệu.</p><div class="vc-f"><span class="who">Analyst · Research</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc" data-cat="learn" data-k="finradar tin tức sự kiện cảnh báo" onclick="markDone(this,'vc-fr')"><div class="vc-done" id="vc-fr"><svg width="10" height="10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">2:35</span></div><div class="vc-b"><h4>FinRadar: tin tức & sự kiện</h4><p>Theo dõi tin tức thị trường theo ngành và nhận cảnh báo sự kiện.</p><div class="vc-f"><span class="who">Tất cả</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc" data-cat="learn" data-k="watchlist alerts cảnh báo theo dõi" onclick="markDone(this,'vc-wa')"><div class="vc-done" id="vc-wa"><svg width="10" height="10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">3:10</span></div><div class="vc-b"><h4>Watchlist & Alerts</h4><p>Tạo danh sách theo dõi và thiết lập cảnh báo giá, sự kiện theo ngành.</p><div class="vc-f"><span class="who">Investor · Broker</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc" data-cat="playbook" data-k="market morning playbook video demo" onclick="markDone(this,'vc-mm')"><div class="vc-done" id="vc-mm"><svg width="10" height="10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Playbook video</div><span class="dur" style="bottom:8px;right:8px">4:00</span></div><div class="vc-b"><h4>Market Morning — Demo</h4><p>Xem demo workflow 15 phút đọc thị trường mỗi sáng trực tiếp trên FinAlpha.</p><div class="vc-f"><span class="who">Investor · Broker</span><span class="cgo">Xem →</span></div></div></div>
+    </div></div>
+    <div class="rv"><div class="sl">Short videos · 9:16 · 30–60 giây</div>
+    <div class="s4">
+      <div class="sc" data-cat="basics" data-k="ai safety an toàn giới hạn đầu tư" onclick="markDone(this,'sc-ai')"><div class="sc-done" id="sc-ai"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">AI Safety</div><div class="sdur">0:52</div></div><div class="sc-b"><h5>AI có thể và không thể làm gì?</h5><p>Ranh giới quan trọng cần hiểu khi dùng AI tài chính.</p></div></div>
+      <div class="sc" data-cat="basics" data-k="pe định giá cơ bản chứng khoán" onclick="markDone(this,'sc-pe')"><div class="sc-done" id="sc-pe"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Finance Basics</div><div class="sdur">0:45</div></div><div class="sc-b"><h5>P/E là gì? Xem ngay trong FinAlpha</h5><p>60 giây hiểu chỉ số định giá cơ bản nhất.</p></div></div>
+      <div class="sc" data-cat="start" data-k="hỏi stockgpt câu đầu tiên prompt" onclick="markDone(this,'sc-sq')"><div class="sc-done" id="sc-sq"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Quick tip</div><div class="sdur">0:38</div></div><div class="sc-b"><h5>Hỏi StockGPT câu đầu tiên</h5><p>Prompt mẫu để bắt đầu đúng, tránh hiểu nhầm.</p></div></div>
+      <div class="sc" data-cat="learn" data-k="watchlist tạo nhanh theo dõi cổ phiếu" onclick="markDone(this,'sc-wl')"><div class="sc-done" id="sc-wl"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Quick tip</div><div class="sdur">0:55</div></div><div class="sc-b"><h5>Tạo Watchlist trong 60 giây</h5><p>Theo dõi cổ phiếu ngay từ lần đầu mở FinAlpha.</p></div></div>
+    </div></div>
+    <div class="rv"><div class="sl">Bài đọc & hướng dẫn</div>
+    <div class="a2">
+      <div class="ac" data-cat="start" data-k="welcome chào mừng bắt đầu" onclick="markDone(this,'ac-w')"><div class="ac-done" id="ac-w"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 22 22"><path d="M4 11h14M11 5l7 6-7 6"/></svg></div><div><h4>Chào mừng đến FinAlpha Academy</h4><p>Hiểu Academy dùng để làm gì và nên bắt đầu từ đâu.</p><div class="ac-f"><span class="tag">Bài 1 · 3 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac" data-cat="start" data-k="finalpha là gì hệ sinh thái" onclick="markDone(this,'ac-fa')"><div class="ac-done" id="ac-fa"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.5"/><path d="M11 3v16M3 11h16"/></svg></div><div><h4>FinAlpha là gì?</h4><p>Toàn bộ hệ sinh thái — StockGPT, FinStock, FinData, FinRadar — trong 5 phút.</p><div class="ac-f"><span class="tag">Bài 2 · 5 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac" data-cat="start" data-k="tạo workspace không gian làm việc" onclick="markDone(this,'ac-ws')"><div class="ac-done" id="ac-ws"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><rect x="3" y="5" width="16" height="13" rx="2"/><path d="M3 9h16"/></svg></div><div><h4>Tạo workspace đầu tiên</h4><p>Thiết lập không gian làm việc, cấu hình layout và lưu trang thường dùng.</p><div class="ac-f"><span class="tag">Bài 4 · 7 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac" data-cat="learn" data-k="dashboard giao diện navigation widget" onclick="markDone(this,'ac-db')"><div class="ac-done" id="ac-db"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.7" viewBox="0 0 22 22"><rect x="2" y="2" width="8" height="9" rx="1.5"/><rect x="12" y="2" width="8" height="5" rx="1.5"/><rect x="12" y="9" width="8" height="11" rx="1.5"/><rect x="2" y="13" width="8" height="7" rx="1.5"/></svg></div><div><h4>Làm quen Dashboard</h4><p>Navigation, widget chính và tùy biến giao diện theo nhu cầu.</p><div class="ac-f"><span class="tag">Learn FinAlpha · 6 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac" data-cat="basics" data-k="bctc báo cáo tài chính financial" onclick="markDone(this,'ac-bc')"><div class="ac-done" id="ac-bc"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 3h10v16H6z" stroke-linejoin="round"/><path d="M8.5 8h5M8.5 11h5M8.5 14h3.5"/></svg></div><div><h4>Đọc Báo cáo Tài chính trong FinAlpha</h4><p>BCTC gồm những phần nào và những con số đáng chú ý nhất.</p><div class="ac-f"><span class="tag">Finance Basics · 8 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac" data-cat="learn" data-k="report builder báo cáo phân tích" onclick="markDone(this,'ac-rb')"><div class="ac-done" id="ac-rb"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 3h8l4 4v13H6V3z" stroke-linejoin="round"/><path d="M9 11h6M9 14.5h6M9 8h3"/></svg></div><div><h4>Report Builder</h4><p>Tạo báo cáo phân tích có cấu trúc với AI hỗ trợ.</p><div class="ac-f"><span class="tag">Learn FinAlpha · 10 phút</span><span class="go">Đọc →</span></div></div></div>
+    </div></div>
+    <div class="rv"><div class="sl">Playbooks · Workflow thực tế</div>
+    <div class="pb-list">
+      <div class="pb" data-cat="playbook" data-k="market morning routine sáng" onclick="markDone(this,'pb-mm')"><div class="pb-done" id="pb-mm"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="13" r="5"/><path d="M11 4v3M5 8l1.8 1.8M17 8l-1.8 1.8" stroke-linecap="round"/></svg></div><div><h4>Market Morning Playbook</h4><p>Routine 15 phút đọc thị trường mỗi sáng — VN-Index, dòng tiền, tin nổi bật.</p><div class="pb-tags"><span>Investor</span><span>Broker</span><span>Analyst</span></div></div><div class="pb-r"><span class="pb-badge">Video + Bài viết</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb" data-cat="playbook" data-k="stock research phân tích cổ phiếu" onclick="markDone(this,'pb-sr')"><div class="pb-done" id="pb-sr"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="9.5" cy="9.5" r="6"/><path d="M13.5 13.5L19 19M7 9.5h5M9.5 7v5"/></svg></div><div><h4>Stock Research Playbook</h4><p>Quy trình phân tích từng bước — business, tài chính, định giá, rủi ro.</p><div class="pb-tags"><span>Investor</span><span>Analyst</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết + Checklist</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb" data-cat="playbook" data-k="portfolio review danh mục checklist" onclick="markDone(this,'pb-pr')"><div class="pb-done" id="pb-pr"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.5"/><path d="M11 7v4.5l3.5 2"/></svg></div><div><h4>Portfolio Review Playbook</h4><p>Checklist định kỳ rà soát danh mục — cơ cấu, performance và điểm cần chú ý.</p><div class="pb-tags"><span>Investor</span><span>Wealth</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết + Checklist</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb" data-cat="playbook" data-k="news insight tin tức phân tích tác động" onclick="markDone(this,'pb-ni')"><div class="pb-done" id="pb-ni"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M4 4h10v14H4zM14 8h4v10a1.5 1.5 0 01-4 0V4" stroke-linejoin="round"/></svg></div><div><h4>News → Insight Playbook</h4><p>Đọc tin, đánh giá tác động đến doanh nghiệp hoặc ngành và ghi chú cấu trúc.</p><div class="pb-tags"><span>Research</span><span>Content</span><span>Broker</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb" data-cat="playbook" data-k="analyst memo report research nhanh" onclick="markDone(this,'pb-aw')"><div class="pb-done" id="pb-aw"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 3h8l4 4v13H6V3z" stroke-linejoin="round"/><path d="M9 13l2.5 2.5 4-5"/></svg></div><div><h4>Analyst Workflow Playbook</h4><p>Dựng memo và report nhanh hơn từ câu hỏi nghiên cứu đến cấu trúc output.</p><div class="pb-tags"><span>Research</span><span>Analyst</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết + Template</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb" data-cat="playbook" data-k="broker advisor gặp khách brief human review" onclick="markDone(this,'pb-bp')"><div class="pb-done" id="pb-bp"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="8" r="3.5"/><path d="M5 19.5c0-3.3 2.7-5 6-5s6 1.7 6 5" stroke-linecap="round"/></svg></div><div><h4>Broker Prep Playbook</h4><p>Nội dung chuẩn bị gặp khách — market brief và key points, có human review.</p><div class="pb-tags"><span>Broker</span><span>Advisor</span></div></div><div class="pb-r"><span class="pb-badge">Video + Bài viết</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb" data-cat="playbook" data-k="executive brief leader manager ngành" onclick="markDone(this,'pb-eb')"><div class="pb-done" id="pb-eb"><svg width="9" height="9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M3 19.5h16M5 19.5V9.5l6-5 6 5v10M9 19.5v-5.5h4v5.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4>Executive Brief Playbook</h4><p>Tổng hợp thị trường và các ngành đang theo dõi theo tuần.</p><div class="pb-tags"><span>Leader</span><span>Manager</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết</span><span class="pb-go">Mở →</span></div></div>
+    </div></div>
+  </div><!-- /b-all -->
+
+  <!-- START HERE block -->
+  <div class="cb" id="b-start">
+    <div class="rv"><div class="sl">Video nổi bật</div>
+    <div class="fv"><div class="fv-th"><div class="wv"></div><div class="fv-play"><svg width="22" height="22" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><span class="dur">3:45</span></div><div class="fv-meta"><span class="fv-chip">Bài 3 · Video · Onboarding</span><h3>10 phút đầu với FinAlpha</h3><p>Tạo workspace, tra cứu cổ phiếu đầu tiên và hỏi StockGPT đúng cách — hoàn thành thao tác đầu tiên.</p><div class="fv-tags"><span>Tất cả người dùng</span><span>New user</span></div><span class="fv-go">Xem video <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></span></div></div></div>
+    <div class="rv"><div class="sl">Short clips</div>
+    <div class="s4">
+      <div class="sc"><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Quick tip</div><div class="sdur">0:38</div></div><div class="sc-b"><h5>Hỏi StockGPT câu đầu tiên</h5><p>Prompt mẫu để bắt đầu đúng cách.</p></div></div>
+      <div class="sc"><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">AI Safety</div><div class="sdur">0:52</div></div><div class="sc-b"><h5>AI có thể và không thể làm gì?</h5><p>Hiểu đúng giới hạn AI tài chính.</p></div></div>
+    </div></div>
+    <div class="rv"><div class="sl">Bài đọc · Start Here</div>
+    <div class="a2">
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 22 22"><path d="M4 11h14M11 5l7 6-7 6"/></svg></div><div><h4>Chào mừng đến FinAlpha Academy</h4><p>Hiểu Academy dùng để làm gì và bắt đầu từ đâu.</p><div class="ac-f"><span class="tag">Bài 1 · 3 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.5"/><path d="M11 3v16M3 11h16"/></svg></div><div><h4>FinAlpha là gì?</h4><p>Toàn bộ hệ sinh thái sản phẩm trong 5 phút.</p><div class="ac-f"><span class="tag">Bài 2 · 5 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><rect x="3" y="5" width="16" height="13" rx="2"/><path d="M3 9h16"/></svg></div><div><h4>Tạo workspace đầu tiên</h4><p>Thiết lập không gian làm việc và layout.</p><div class="ac-f"><span class="tag">Bài 4 · 7 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" stroke-linejoin="round"/></svg></div><div><h4>AI có thể và không thể làm gì?</h4><p>Ranh giới quan trọng trước khi dùng StockGPT.</p><div class="ac-f"><span class="tag">Bài 7 · 6 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="9.5" cy="9.5" r="6"/><path d="M14 14l5 5"/></svg></div><div><h4>Tìm và xem thông tin cổ phiếu</h4><p>Tra mã cổ phiếu và đọc trang tổng quan.</p><div class="ac-f"><span class="tag">Bài 5 · 5 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 22 22"><path d="M4 12l5 5 9-10"/></svg></div><div><h4>Checklist bắt đầu</h4><p>Xác nhận bạn đã hoàn thành lớp onboarding cơ bản.</p><div class="ac-f"><span class="tag">Bài 8 · 3 phút</span><span class="go">Đọc →</span></div></div></div>
+    </div></div>
+  </div><!-- /b-start -->
+
+  <!-- LEARN FINALPHA block -->
+  <div class="cb" id="b-learn">
+    <div class="rv"><div class="sl">Video tutorials · Learn FinAlpha · 16:9</div>
+    <div class="v3">
+      <div class="vc"><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">2:50</span></div><div class="vc-b"><h4>Cách hỏi StockGPT hiệu quả</h4><p>Prompt mẫu, cách đọc và kiểm chứng output AI.</p><div class="vc-f"><span class="who">Tất cả</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc"><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">3:20</span></div><div class="vc-b"><h4>FinStock: đọc trang cổ phiếu</h4><p>Dữ liệu doanh nghiệp, so sánh chỉ số định giá.</p><div class="vc-f"><span class="who">Investor · Analyst</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc"><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">3:55</span></div><div class="vc-b"><h4>FinData: khai thác dữ liệu</h4><p>Lọc ngành, so sánh nhiều mã và xuất file.</p><div class="vc-f"><span class="who">Analyst</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc"><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">2:35</span></div><div class="vc-b"><h4>FinRadar: tin tức & sự kiện</h4><p>Theo dõi tin tức thị trường và nhận cảnh báo.</p><div class="vc-f"><span class="who">Tất cả</span><span class="cgo">Xem →</span></div></div></div>
+      <div class="vc"><div class="vc-t"><div class="tg"></div><div class="vpl"><svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="vcat">Tutorial</div><span class="dur" style="bottom:8px;right:8px">3:10</span></div><div class="vc-b"><h4>Watchlist & Alerts</h4><p>Tạo danh sách theo dõi và thiết lập cảnh báo.</p><div class="vc-f"><span class="who">Investor</span><span class="cgo">Xem →</span></div></div></div>
+    </div></div>
+    <div class="rv"><div class="sl">Bài đọc</div>
+    <div class="a2">
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.7" viewBox="0 0 22 22"><rect x="2" y="2" width="8" height="9" rx="1.5"/><rect x="12" y="2" width="8" height="5" rx="1.5"/><rect x="12" y="9" width="8" height="11" rx="1.5"/><rect x="2" y="13" width="8" height="7" rx="1.5"/></svg></div><div><h4>Làm quen Dashboard</h4><p>Navigation, widget chính và tùy biến giao diện.</p><div class="ac-f"><span class="tag">6 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 3h8l4 4v13H6V3z" stroke-linejoin="round"/><path d="M9 11h6M9 14.5h6M9 8h3"/></svg></div><div><h4>Report Builder</h4><p>Tạo báo cáo phân tích có cấu trúc với AI hỗ trợ.</p><div class="ac-f"><span class="tag">10 phút</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="9" cy="7.5" r="3"/><path d="M3 18c0-3.3 2.7-5 6-5s6 1.7 6 5M15 10.5a2.5 2.5 0 100-5M20 18c0-2.5-1.5-4-4-4.5" stroke-linecap="round"/></svg></div><div><h4>Admin & Team</h4><p>Phân quyền thành viên, quản lý usage và credit.</p><div class="ac-f"><span class="tag">8 phút</span><span class="go">Đọc →</span></div></div></div>
+    </div></div>
+  </div><!-- /b-learn -->
+
+  <!-- PLAYBOOKS block -->
+  <div class="cb" id="b-playbook">
+    <div class="rv"><div class="sl">Video nổi bật</div>
+    <div class="fv"><div class="fv-th"><div class="wv"></div><div class="fv-play"><svg width="22" height="22" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><span class="dur">4:00</span></div><div class="fv-meta"><span class="fv-chip">Playbook · Video demo</span><h3>Market Morning Playbook</h3><p>Xem demo workflow 15 phút đọc thị trường mỗi sáng — VN-Index, dòng tiền, tin nổi bật — trực tiếp trên FinAlpha.</p><div class="fv-tags"><span>Investor</span><span>Broker</span><span>Analyst</span></div><span class="fv-go">Xem video demo <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></span></div></div></div>
+    <div class="rv"><div class="sl">Tất cả Playbooks</div>
+    <div class="pb-list">
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="13" r="5"/><path d="M11 4v3M5 8l1.8 1.8M17 8l-1.8 1.8" stroke-linecap="round"/></svg></div><div><h4>Market Morning Playbook</h4><p>Routine 15 phút đọc thị trường mỗi sáng.</p><div class="pb-tags"><span>Investor</span><span>Broker</span><span>Analyst</span></div></div><div class="pb-r"><span class="pb-badge">Video + Bài viết</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="9.5" cy="9.5" r="6"/><path d="M13.5 13.5L19 19M7 9.5h5M9.5 7v5"/></svg></div><div><h4>Stock Research Playbook</h4><p>Phân tích từng bước — business, tài chính, định giá, rủi ro.</p><div class="pb-tags"><span>Investor</span><span>Analyst</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết + Checklist</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.5"/><path d="M11 7v4.5l3.5 2"/></svg></div><div><h4>Portfolio Review Playbook</h4><p>Checklist định kỳ rà soát danh mục đầu tư.</p><div class="pb-tags"><span>Investor</span><span>Wealth</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết + Checklist</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M4 4h10v14H4zM14 8h4v10a1.5 1.5 0 01-4 0V4" stroke-linejoin="round"/></svg></div><div><h4>News → Insight Playbook</h4><p>Đọc tin, đánh giá tác động và ghi chú có cấu trúc.</p><div class="pb-tags"><span>Research</span><span>Content</span><span>Broker</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 3h8l4 4v13H6V3z" stroke-linejoin="round"/><path d="M9 13l2.5 2.5 4-5"/></svg></div><div><h4>Analyst Workflow Playbook</h4><p>Dựng memo và report nhanh từ câu hỏi đến output.</p><div class="pb-tags"><span>Research</span><span>Analyst</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết + Template</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><circle cx="11" cy="8" r="3.5"/><path d="M5 19.5c0-3.3 2.7-5 6-5s6 1.7 6 5" stroke-linecap="round"/></svg></div><div><h4>Broker Prep Playbook</h4><p>Nội dung gặp khách — market brief, có human review.</p><div class="pb-tags"><span>Broker</span><span>Advisor</span></div></div><div class="pb-r"><span class="pb-badge">Video + Bài viết</span><span class="pb-go">Mở →</span></div></div>
+      <div class="pb"><div class="pb-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M3 19.5h16M5 19.5V9.5l6-5 6 5v10M9 19.5v-5.5h4v5.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4>Executive Brief Playbook</h4><p>Tổng hợp thị trường và các ngành theo dõi theo tuần.</p><div class="pb-tags"><span>Leader</span><span>Manager</span></div></div><div class="pb-r"><span class="pb-badge">Bài viết</span><span class="pb-go">Mở →</span></div></div>
+    </div></div>
+  </div><!-- /b-playbook -->
+
+  <!-- FINANCE BASICS block -->
+  <div class="cb" id="b-basics">
+    <div class="rv"><div class="sl">Short videos · Finance Basics · 9:16</div>
+    <div class="s4">
+      <div class="sc"><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Finance Basics</div><div class="sdur">0:45</div></div><div class="sc-b"><h5>P/E là gì? Xem ngay FinAlpha</h5><p>60 giây hiểu chỉ số định giá.</p></div></div>
+      <div class="sc"><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Finance Basics</div><div class="sdur">0:50</div></div><div class="sc-b"><h5>Thanh khoản & Volume — đọc ở đâu?</h5><p>Xem chỉ số volume ngay trên FinAlpha.</p></div></div>
+      <div class="sc"><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">Finance Basics</div><div class="sdur">0:55</div></div><div class="sc-b"><h5>VN-Index là gì? Xem Market Overview</h5><p>Chỉ số thị trường và cách đọc nhanh.</p></div></div>
+      <div class="sc"><div class="sc-t"><div class="sg"></div><div class="spl"><svg width="14" height="14" fill="#fff" viewBox="0 0 24 24"><path d="M6 4l16 8-16 8V4z"/></svg></div><div class="schip">AI Safety</div><div class="sdur">0:52</div></div><div class="sc-b"><h5>AI trong đầu tư — dùng thế nào?</h5><p>Hiểu đúng giới hạn AI tài chính.</p></div></div>
+    </div></div>
+    <div class="rv"><div class="sl">Bài đọc · Mỗi bài gắn với thao tác trong FinAlpha</div>
+    <div class="a2">
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 22 22"><path d="M3 17l5-6 4 3 7-9" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4>Cổ phiếu & VN-Index là gì?</h4><p>Khái niệm cơ bản, xem trong Market Overview.</p><div class="ac-f"><span class="tag">5 phút · Gắn FinAlpha</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2.2" viewBox="0 0 22 22"><path d="M4 19.5V10M9 19.5V4M14 19.5v-8M19 19.5" stroke-linecap="round"/></svg></div><div><h4>Thanh khoản & Volume</h4><p>Đọc volume và giá trị khớp lệnh trong FinAlpha.</p><div class="ac-f"><span class="tag">6 phút · Gắn FinAlpha</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 17L17 6" stroke-linecap="round"/><circle cx="7.5" cy="7.5" r="3"/><circle cx="14.5" cy="14.5" r="3"/></svg></div><div><h4>Định giá cơ bản: P/E, P/B</h4><p>Xem và so sánh chỉ số định giá trong FinStock.</p><div class="ac-f"><span class="tag">7 phút · Gắn FinAlpha</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><path d="M6 3h10v16H6z" stroke-linejoin="round"/><path d="M8.5 8h5M8.5 11h5M8.5 14h3.5"/></svg></div><div><h4>Đọc Báo cáo Tài chính</h4><p>Mở financial statement và đọc đúng các phần chính.</p><div class="ac-f"><span class="tag">8 phút · Gắn FinAlpha</span><span class="go">Đọc →</span></div></div></div>
+      <div class="ac"><div class="ac-ico"><svg width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 22 22"><rect x="5" y="8" width="12" height="10" rx="2"/><path d="M11 8V4.5M9 12h.01M13 12h.01"/></svg></div><div><h4>AI trong đầu tư — dùng đúng cách</h4><p>Hỏi StockGPT an toàn, tránh hiểu nhầm.</p><div class="ac-f"><span class="tag">6 phút · AI Safety</span><span class="go">Đọc →</span></div></div></div>
+    </div></div>
+  </div><!-- /b-basics -->
+
+  <!-- PRODUCT UPDATES block -->
+  <div class="cb" id="b-updates">
+    <div class="rv"><div class="sl">Product Updates & Demos · Cập nhật mới nhất</div>
+    <div class="upd-grid">
+      <div class="upd"><div class="upd-top"><div class="upd-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 20 20"><path d="M10 2l7 3.5v5C17 15 14 18 10 19 6 18 3 15 3 10.5V5.5L10 2z"/></svg></div><span class="upd-chip">Demo clip</span><span class="upd-date">T5/2026</span></div><h4>FinAlpha v2.4 — Report Builder AI</h4><p>Demo tính năng Report Builder mới: tạo báo cáo phân tích có cấu trúc từ câu hỏi tự nhiên.</p><div class="upd-go">Xem demo →</div></div>
+      <div class="upd"><div class="upd-top"><div class="upd-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 20 20"><path d="M4 4h12v12H4zM4 9h12M9 4v12"/></svg></div><span class="upd-chip">Release note</span><span class="upd-date">T4/2026</span></div><h4>Cập nhật FinData: lọc theo sector</h4><p>FinData nay hỗ trợ lọc dữ liệu theo ngành, so sánh tối đa 10 mã cùng lúc và xuất CSV.</p><div class="upd-go">Đọc release note →</div></div>
+      <div class="upd"><div class="upd-top"><div class="upd-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 20 20"><path d="M4 5h12v10H9l-5 4V5z" stroke-linejoin="round"/></svg></div><span class="upd-chip">Q&A async</span><span class="upd-date">T4/2026</span></div><h4>Q&A: Dùng StockGPT đúng cách</h4><p>Câu hỏi thường gặp về cách prompt, giới hạn AI và các lỗi phổ biến khi hỏi StockGPT.</p><div class="upd-go">Xem Q&A →</div></div>
+      <div class="upd"><div class="upd-top"><div class="upd-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.8" viewBox="0 0 20 20"><path d="M10 2l2.5 5 5.5.6-4 3.9 1 5.4L10 14.5 5 17 6 11.5 2 7.6l5.5-.6L10 2z"/></svg></div><span class="upd-chip">Demo clip</span><span class="upd-date">T3/2026</span></div><h4>FinRadar: theo dõi sự kiện doanh nghiệp</h4><p>Demo cách dùng FinRadar để nhận cảnh báo sự kiện quan trọng và theo dõi ngành.</p><div class="upd-go">Xem demo →</div></div>
+    </div></div>
+  </div><!-- /b-updates -->
+
+  <div class="empty" id="empty">Không tìm thấy bài học phù hợp — thử từ khóa khác nhé.</div>
+</div>
+</section><!-- /lib-sec -->
+<!-- ── FOR BUSINESS ── -->
+<section class="biz-sec" id="biz-sec">
+<div class="wrap">
+  <div class="biz-wrap rv">
+    <div>
+      <span class="sec-ey">FinAlpha for Business</span>
+      <h2>Triển khai FinAlpha cho cả đội ngũ tài chính.</h2>
+      <p>Giúp đội research, sales, advisory và quản lý dùng AI/data có kiểm soát — từ market intelligence đến báo cáo và onboarding nội bộ.</p>
+      <ul class="biz-chk">
+        <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="7.5" stroke="#00b8b8" stroke-width="1.4"/><path d="M5 8.5l2.3 2.3 4.7-4.3" stroke="#00b8b8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Use case và workflow mẫu theo từng phòng ban</li>
+        <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="7.5" stroke="#00b8b8" stroke-width="1.4"/><path d="M5 8.5l2.3 2.3 4.7-4.3" stroke="#00b8b8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Phân quyền, human review và audit trail</li>
+        <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="7.5" stroke="#00b8b8" stroke-width="1.4"/><path d="M5 8.5l2.3 2.3 4.7-4.3" stroke="#00b8b8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Demo flow và sample output thực tế cho buyer</li>
+        <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="7.5" stroke="#00b8b8" stroke-width="1.4"/><path d="M5 8.5l2.3 2.3 4.7-4.3" stroke="#00b8b8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Lộ trình onboarding nội bộ và tài liệu đào tạo</li>
+      </ul>
+      <button class="btn btn-f" style="font-size:14px;padding:12px 24px">Đăng ký tư vấn <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 14 14"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button>
+    </div>
+    <div class="biz-cards">
+      <div class="bc"><div class="bc-h"><div class="bc-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.6" viewBox="0 0 18 18"><path d="M3 16V7l6-4 6 4v9M7 16v-5h4v5"/></svg></div><h4>Use Cases by Team</h4></div><p>Research, Sales, Advisory, Marketing, Training, Management — mỗi đội một workflow mẫu sẵn dùng.</p></div>
+      <div class="bc"><div class="bc-h"><div class="bc-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.6" viewBox="0 0 18 18"><path d="M9 1.5l6 3v5C15 13.5 12.5 16 9 17 5.5 16 3 13.5 3 9.5v-5l6-3z"/></svg></div><h4>Security &amp; Compliance</h4></div><p>Phân quyền, dữ liệu, human review và audit — bộ tài liệu đầy đủ cho team IT và legal.</p></div>
+      <div class="bc"><div class="bc-h"><div class="bc-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.6" viewBox="0 0 18 18"><path d="M4 4h10v10H4zM4 8h10M7 12h4"/></svg></div><h4>Enterprise Onboarding</h4></div><p>Lộ trình đào tạo nội bộ từng bước — kèm hỗ trợ trực tiếp từ team FinAlpha.</p></div>
+      <div class="bc"><div class="bc-h"><div class="bc-ico"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="1.6" viewBox="0 0 18 18"><path d="M3 3h12v12H3zM7 3v12M3 7h12M3 11h12"/></svg></div><h4>Business Playbooks</h4></div><p>Workflow mẫu theo từng phòng ban — sẵn sàng để team áp dụng ngay vào công việc.</p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-sec">
+<div class="wrap rv">
+  <div class="cta-band">
+    <div class="cta-glow"></div>
+    <span class="sec-ey" style="justify-content:center;display:flex;margin-bottom:14px">Start with FinAlpha</span>
+    <h2>Bắt đầu học ngay hôm nay.</h2>
+    <p>Không cần background tài chính. Chọn đúng bài cho việc bạn đang làm và thực hành luôn trong FinAlpha.</p>
+    <div class="cta-btns">
+      <button class="btn btn-f" onclick="scroll('#start')">Vào lộ trình Start Here</button>
+      <button class="btn btn-g" onclick="scroll('#lib-sec')">Xem toàn bộ thư viện</button>
+    </div>
+    <p class="cta-note">Miễn phí · Không cần tạo tài khoản để xem</p>
+  </div>
+</div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+<div class="wrap">
+  <div class="ft">
+    <div class="fb">
+      <img src="logo.png" alt="FinAlpha">
+      <p class="fb-desc">FinAlpha Academy — hướng dẫn thực hành giúp cá nhân và tổ chức dùng FinAlpha hiệu quả từ ngày đầu tiên, học theo đúng vai trò và workflow thực tế.</p>
+      <div class="fb-info">
+        <a href="https://www.fintechai.vn" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5"/><path d="M8 1.5C9.5 3 10.5 5.4 10.5 8s-1 5-2.5 6.5M8 1.5C6.5 3 5.5 5.4 5.5 8s1 5 2.5 6.5M1.5 8h13"/></svg>
+          www.fintechai.vn
+        </a>
+        <a href="mailto:hello@fintechai.vn">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 16 16"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5"/><path d="M1.5 4.5l6.5 4.5 6.5-4.5"/></svg>
+          hello@fintechai.vn
+        </a>
+        <a href="#">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 16 16"><path d="M2 2h4.5L8 6l-2 1.5c.8 1.6 2.2 3 3.8 3.8L11 9l4 1.5V15c0 .3-.2.5-.5.5C6 15 1 10 1 2.5 1 2.2 1.2 2 2 2z"/></svg>
+          Công ty Cổ phần Fintech AI
+        </a>
+      </div>
+    </div>
+    <div class="fc"><h6>Học tập</h6><a href="#start">Start Here</a><a href="#lib-sec">Learn FinAlpha</a><a href="#lib-sec" onclick="setTab('playbook')">Playbooks</a><a href="#lib-sec" onclick="setTab('basics')">Finance Basics</a><a href="#lib-sec" onclick="setTab('updates')">Product Updates</a></div>
+    <div class="fc"><h6>Doanh nghiệp</h6><a href="#biz-sec">FinAlpha for Business</a><a href="#biz-sec">Security &amp; Compliance</a><a href="#biz-sec">Enterprise Onboarding</a><a href="#biz-sec">Business Playbooks</a></div>
+    <div class="fc"><h6>Công ty</h6><a href="https://www.fintechai.vn" target="_blank" rel="noopener">fintechai.vn</a><a href="#">Về FinAlpha</a><a href="#">Sản phẩm</a><a href="#">Tuyển dụng</a><a href="#">Liên hệ</a></div>
+  </div>
+  <div class="disc"><b>Tuyên bố miễn trừ:</b> Nội dung trên FinAlpha Academy chỉ nhằm mục đích giáo dục và cung cấp thông tin tham khảo — không phải khuyến nghị đầu tư, tín hiệu giao dịch hoặc cam kết lợi nhuận. FinAlpha hỗ trợ tổng hợp và cấu trúc thông tin; quyết định đầu tư thuộc trách nhiệm của người dùng. Công ty Cổ phần Fintech AI — <a href="https://www.fintechai.vn" style="color:var(--sub)">www.fintechai.vn</a></div>
+  <div class="fb2"><p>&copy; 2026 Công ty Cổ phần Fintech AI. Trang demo nội bộ — FinAlpha Academy.</p><p>academy.finalpha.vn</p></div>
+</div>
+</footer>
+
+<script>
+// Scroll helper
+function scroll(id){const el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth'})}
+
+// Nav
+const hdr=document.getElementById('hdr');
+window.addEventListener('scroll',()=>hdr.classList.toggle('up',scrollY>20),{passive:true});
+const burger=document.getElementById('burger'),mnav=document.getElementById('mnav');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mnav.classList.toggle('open')});
+function closeMnav(){burger.classList.remove('open');mnav.classList.remove('open')}
+
+// TABS — full working
+const TCOUNT={all:'28 bài học · 6 video tutorial · 4 short clip',start:'8 bài · 1 video nổi bật · 2 short clip',learn:'8 bài · 5 video tutorial',playbook:'7 playbooks · 1 video demo',basics:'5 bài · 4 short clip',updates:'4 bài cập nhật mới'};
+function setTab(t){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.t===t));
+  document.querySelectorAll('.cb').forEach(b=>b.classList.remove('show'));
+  const blk=document.getElementById('b-'+t);
+  if(blk)blk.classList.add('show');
+  const ti=document.getElementById('tinfo');
+  if(ti)ti.textContent=TCOUNT[t]||'';
+  document.getElementById('q').value='';
+  document.getElementById('empty').classList.remove('show');
+  // re-trigger reveal for new block
+  document.querySelectorAll('#b-'+t+' .rv').forEach(el=>{
+    el.classList.remove('in');
+    setTimeout(()=>el.classList.add('in'),50);
+  });
+}
+document.getElementById('tabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');
+  if(!tab||!tab.dataset.t)return;
+  setTab(tab.dataset.t);
+});
+
+// Search
+document.getElementById('q').addEventListener('input',function(){
+  const kw=this.value.toLowerCase().trim();
+  const activeTab=document.querySelector('.tab.on');
+  const t=activeTab?activeTab.dataset.t:'all';
+  const block=document.getElementById('b-'+t);
+  if(!block)return;
+  const cards=[...block.querySelectorAll('[data-k]')];
+  let hits=0;
+  cards.forEach(el=>{
+    const card=el.closest('.vc,.sc,.ac,.pb,.upd');
+    if(!card)return;
+    const txt=(el.dataset.k+' '+card.textContent).toLowerCase();
+    const show=!kw||txt.includes(kw);
+    card.style.display=show?'':'none';
+    if(show)hits++;
+  });
+  document.getElementById('empty').classList.toggle('show',hits===0&&kw.length>0);
+});
+
+// PERSONA paths
+function setPersona(p){
+  document.querySelectorAll('.persona').forEach(x=>x.classList.toggle('on',x.dataset.p===p));
+  document.querySelectorAll('.pc-block').forEach(b=>b.classList.remove('show'));
+  const blk=document.getElementById('pc-'+p);
+  if(blk)blk.classList.add('show');
+}
+
+// PROGRESS / completion
+const TOTAL_ITEMS=28;
+function getProgress(){try{return JSON.parse(localStorage.getItem('fa_progress')||'[]')}catch{return[]}}
+function saveProgress(arr){try{localStorage.setItem('fa_progress',JSON.stringify(arr))}catch{}}
+function updateProgressBar(){
+  const done=getProgress();
+  const n=done.length,pct=Math.round(n/TOTAL_ITEMS*100);
+  const fill=document.getElementById('prog-fill');
+  const txt=document.getElementById('prog-txt');
+  if(fill)fill.style.width=pct+'%';
+  if(txt)txt.textContent=n+' / '+TOTAL_ITEMS+' bài';
+  // restore checkmarks
+  done.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.classList.add('show');
+  });
+}
+function markDone(card,doneId){
+  const doneEl=document.getElementById(doneId);
+  if(doneEl){
+    doneEl.classList.add('show');
+    const arr=getProgress();
+    if(!arr.includes(doneId)){arr.push(doneId);saveProgress(arr);}
+    updateProgressBar();
+  }
+}
+updateProgressBar();
+
+// Reveal on scroll
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
